@@ -1,0 +1,99 @@
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+}
+
+* {
+   margin: 0;
+}
+
+body {
+   line-height: 1.5;
+   -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+   display: block;
+   max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+   font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   overflow-wrap: break-word;
+}
+
+/* * {
+   border: 1px solid red;
+} */
+
+* > * + * {
+   margin: 1rem;
+}
+
+.main-container {
+   height: 100vh;
+   display: grid;
+   grid-template-columns: 1fr 4fr;
+}
+
+.task,
+.task-test {
+   border: 1px solid;
+   width: 75%;
+   height: clamp(5vh, 5vh, 15vh);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 0 auto;
+   padding-left: 1.5rem;
+   padding-right: 1.5rem;
+}
+
+form > .task-notes {
+   resize: none;
+}
+
+form {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+form.create-new-task > *, dialog > h2 {
+   width: 100%;
+   margin: 0 auto;
+}
+
+.task-details {
+   display: flex;
+   height: 100%;
+   flex-direction: row;
+   align-items: center;
+}
+
+.new-task-buttons button {
+    display: block;
+    width: 100%;
+    margin: .5rem 0;
+}
+
+dialog > h2 {
+    margin-left: 1rem;
+}
