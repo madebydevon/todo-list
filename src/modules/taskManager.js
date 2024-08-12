@@ -1,15 +1,15 @@
-const tasks = {
+export const tasks = {
    "Update website": {
       taskName: "Update website",
       taskNotes: "Maintain the website to standards",
-      taskPriority: "High Priority",
+      taskPriority: "High priority",
       taskDueDate: new Date(),
-      taskProject: "Web development",
+      taskProject: "Default",
       taskComplete: false,
    },
 }
 
-function createTask(
+export function createTask(
    taskName,
    taskNotes,
    taskPriority,
@@ -17,7 +17,6 @@ function createTask(
    taskProject,
    taskComplete
 ) {
-   taskName = `${taskName}`
    tasks[`${taskName}`] = {
       taskName,
       taskNotes,
@@ -28,10 +27,22 @@ function createTask(
    }
 }
 
-function removeTask(name) {
+export function removeTask(name) {
    delete tasks[`${name}`]
 }
 
-function updateTask() {}
+export function updateTask(taskInfo) {
+   tasks[taskInfo.newTaskName] = taskInfo
+   console.log(tasks)
+}
 
-export { tasks, createTask, removeTask, updateTask }
+export function getTaskInfo(taskDataValue) {
+   return {
+      taskName: `${tasks[taskDataValue].taskName}`,
+      taskNotes: `${tasks[taskDataValue].taskNotes}`,
+      taskPriority: `${tasks[taskDataValue].taskPriority}`,
+      taskProject: `${tasks[taskDataValue].taskProject}`,
+      taskDueDate: `${tasks[taskDataValue].taskDueDate}`,
+      taskComplete: `${tasks[taskDataValue].taskComplete}`,
+   }
+}

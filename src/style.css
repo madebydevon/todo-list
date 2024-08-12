@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+   --step--3: clamp(0.434rem, 0.3624rem + 0.3582vw, 0.64rem);
+   --step--2: clamp(0.5208rem, 0.4237rem + 0.4855vw, 0.8rem);
+   --step--1: clamp(0.775rem, 0.4946rem + 0.6522vw, 1rem);
+   --step-0: clamp(0.75rem, 0.5761rem + 0.8696vw, 1.25rem);
+   --step-1: clamp(0.9rem, 0.6696rem + 1.1522vw, 1.5625rem);
+   --step-2: clamp(1.08rem, 0.7763rem + 1.5185vw, 1.9531rem);
+   --step-3: clamp(1.296rem, 0.8976rem + 1.992vw, 2.4414rem);
+   --step-4: clamp(1.5552rem, 1.0347rem + 2.6027vw, 3.0518rem);
+}
 *,
 *::before,
 *::after {
@@ -39,61 +51,244 @@ h6 {
    overflow-wrap: break-word;
 }
 
-/* * {
-   border: 1px solid red;
-} */
+html {
+   background: #212121;
+}
 
-* > * + * {
-   margin: 1rem;
+* {
+   font-family: "Poppins", "Inter", system-ui, sans-serif;
+}
+
+.sidebar-container {
+   background-color: rgb(38, 37, 37);
+   color: white;
+   max-width: 290px;
+}
+
+.group-title {
+   margin-left: 1rem;
+}
+
+.task-groups,
+.projects-container {
+   display: flex;
+   flex-direction: column;
+}
+
+.task-groups {
+   margin-bottom: 2rem;
+}
+
+.task-groups > div,
+.projects-container > div {
+   display: flex;
+   padding: 0.5rem;
+   padding-left: 1rem;
+   padding-right: 1rem;
+   margin: 0.5rem;
+   font-weight: 500;
+   font-size: var(--step--1);
+
+   border-radius: 10px;
+   transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+      border-radius 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s;
+   -webkit-transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+      border-radius 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s;
+   -moz-transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+      border-radius 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s;
+   -ms-transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+      border-radius 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s;
+   -o-transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+      border-radius 250ms cubic-bezier(0.16, 1, 0.3, 1) 0s;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   -ms-border-radius: 10px;
+   -o-border-radius: 10px;
+}
+
+.add-project {
+   background: transparent;
+   color: white;
+   border: 0px solid;
+}
+
+.task-groups > h2,
+.projects-container > h2 {
+   font-size: var(--step-0);
+}
+
+.task-groups > div:hover,
+.projects-container > div:hover {
+   background-color: #444141;
+   cursor: pointer;
+}
+
+.task-group > .task-count,
+.project-group > .task-count {
+   margin-left: auto;
+   color: #cbcaca;
+   font-weight: 500;
 }
 
 .main-container {
+   top: 0;
+   left: 0;
    height: 100vh;
    display: grid;
-   grid-template-columns: 1fr 4fr;
+   grid-template-columns: 1fr 6fr;
 }
 
-.task,
-.task-test {
-   border: 1px solid;
-   width: 75%;
-   height: clamp(5vh, 5vh, 15vh);
+.main-container > div {
+   padding: 1rem;
+}
+
+.sidebar-container {
+   border-radius: 0 16px 16px 0px;
+   -webkit-border-radius: 0 16px 16px 0px;
+   -moz-border-radius: 0 16px 16px 0px;
+   -ms-border-radius: 0 16px 16px 0px;
+   -o-border-radius: 0 16px 16px 0px;
+}
+
+button {
+   cursor: pointer;
+}
+
+.main-content {
+   color: white;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+}
+
+.main-content > * {
    display: flex;
-   justify-content: space-between;
+   align-items: center;
+   flex-direction: column;
+   margin-bottom: 1.5rem;
+}
+
+.pending-tasks {
+   background-color: rgb(47, 46, 46);
+   border-radius: 8px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   -ms-border-radius: 8px;
+   -o-border-radius: 8px;
+   padding: 2rem;
+   color: white;
+   margin: 1rem auto;
+   width: max-content;
+   font-weight: 600;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.pending-tasks > .task-count {
+   font-size: var(--step-2);
+}
+
+.pending-tasks > p:not(".task-count") {
+   font-size: var(--step--2);
+}
+
+.tasks {
+   margin: 0 auto;
+   width: 100%;
+   max-width: 700px;
+}
+
+.task {
+   background-color: rgb(47, 46, 46);
+   border: 1px solid rgb(54, 54, 54);
+   width: 100%;
+   height: clamp(5vh, 5vh, 15vh);
+   font-weight: 600;
+   display: flex;
    align-items: center;
    margin: 0 auto;
    padding-left: 1.5rem;
    padding-right: 1.5rem;
+   font-size: var(--step--1);
 }
 
-form > .task-notes {
-   resize: none;
+.task:hover {
+   cursor: pointer;
 }
 
-form {
-   display: flex;
-   flex-direction: column;
-   gap: 1rem;
+.task-details > .due-date {
+   font-weight: 400;
 }
 
-form.create-new-task > *, dialog > h2 {
-   width: 100%;
-   margin: 0 auto;
+.task-name {
+   margin-left: 20px;
 }
 
 .task-details {
+   margin-left: auto;
+}
+
+.task {
+   margin-bottom: 0.5rem;
+   border-radius: 8px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   -ms-border-radius: 8px;
+   -o-border-radius: 8px;
+   cursor: default;
+}
+
+input[type="checkbox"]:hover {
+   cursor: pointer;
+}
+
+/* New task dialog styling */
+
+dialog textarea {
+   resize: none;
+}
+
+#new-task-dialog h2 {
+   margin: 1rem auto;
+}
+
+#new-task-dialog > form {
+   margin: 0;
+   width: 22.5rem;
+}
+
+.wrapper,
+.detail-group,
+.new-task-buttons {
    display: flex;
-   height: 100%;
+   flex-direction: column;
+   margin: 0;
+}
+
+.wrapper > *,
+.detail-group > *,
+.new-task-buttons > * {
+   margin: 0.5rem auto;
+   width: 100%;
+}
+
+@media (max-width: 428px) {
+   .sidebar-container {
+      display: none;
+   }
+
+   .main-container {
+      margin-top: 20%;
+      display: flex;
+      justify-content: center;
+   }
+}
+
+dialog.update-modal .new-task-buttons {
+   display: flex;
    flex-direction: row;
-   align-items: center;
-}
-
-.new-task-buttons button {
-    display: block;
-    width: 100%;
-    margin: .5rem 0;
-}
-
-dialog > h2 {
-    margin-left: 1rem;
+   gap: 16px;
 }

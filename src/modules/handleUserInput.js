@@ -1,57 +1,45 @@
 import { tasks, createTask } from "./taskManager.js"
+import { closeModal } from "./listenEvents.js"
 
 function getNewTaskFormOutput() {
    const nameInput = document.querySelector("input[class='task-name']")
    let taskName = nameInput.value
-   nameInput.value = ""
 
    const notesInput = document.querySelector("textarea[class='task-notes']")
    let taskNotes = notesInput.value
-   notesInput.value = ""
 
    const priorityInput = document.querySelector("select#task-priority")
    let taskPriority = priorityInput.value
-   priorityInput.value = ""
 
    const dueDateInput = document.querySelector("input[type='date']")
-   let taskDueDate = dueDateInput.value
-   dueDateInput.value = ""
+   let taskDueDate = new Date(dueDateInput.value)
 
    const projectInput = document.querySelector("select#task-project")
-   let taskProject = projectInput.value
-   projectInput.value = ""
+   let taskProject = ""
+   if (projectInput.value === "No priority") {
+      return
+   } else {
+      taskProject = projectInput.value
+   }
 
-   if (
-      validateInput(
-         `${taskName}`,
-         `${taskNotes}`,
-         `${taskPriority}`,
-         `${taskDueDate}`,
-         `${taskProject}`
-      ) == true
-   ) {
+   if (validateInput(taskName, taskPriority, taskProject) == true) {
+      closeModal()
       createTask(
          `${taskName}`,
          `${taskNotes}`,
          `${taskPriority}`,
-         `${taskDueDate}`,
-         `${taskProject}`
+         taskDueDate,
+         `${taskProject}`,
+         false
       )
    } else {
       return
    }
 }
 
-function validateInput(
-   taskName,
-   taskNotes,
-   taskPriority,
-   taskDueDate,
-   taskProject
-) {
-   console.log(taskName, taskNotes, taskPriority, taskDueDate, taskProject)
+function validateInput(taskName, taskPriority, taskProject) {
    if (taskName === "" || taskPriority === "" || taskProject === "") {
-      return
+      return false
    } else {
       return true
    }

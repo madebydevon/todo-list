@@ -1,4 +1,5 @@
 import flagIcon from "../assets/flag-outline.svg"
+import { onTaskClick } from "./listenEvents.js"
 
 export function createTaskDisplay(
    taskName,
@@ -11,6 +12,13 @@ export function createTaskDisplay(
    const container = document.querySelector("div.tasks")
    const wrapper = document.createElement("div")
    wrapper.classList.add("task")
+   wrapper.setAttribute("data-value", `${taskName}`)
+
+   const checkbox = document.createElement("input")
+   checkbox.classList.add("complete-task")
+   checkbox.setAttribute("type", "checkbox")
+   checkbox.setAttribute("data-value", `${taskName}`)
+   wrapper.appendChild(checkbox)
 
    const taskNameText = document.createElement("p")
    taskNameText.classList.add("task-name")

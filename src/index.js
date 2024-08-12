@@ -1,6 +1,6 @@
 // TODO APP
 import("./style.css")
-import { handleNewTask } from "./modules/listenEvents.js"
+import { handleNewTask, onTaskClick } from "./modules/listenEvents.js"
 import { displayTasks } from "./modules/displayTasks.js"
 import {
    tasks,
@@ -10,11 +10,11 @@ import {
 } from "./modules/taskManager.js"
 
 const task = createTask(
-   "Update website1",
+   "Research topics",
    "Maintain the website to standards",
-   "High Priority",
+   "Medium priority",
    new Date(),
-   "Web development",
+   "Default",
    false
 )
 
@@ -22,6 +22,7 @@ const task = createTask(
 
 displayTasks()
 handleNewTask()
+onTaskClick()
 console.log(tasks)
 
 // console.log()

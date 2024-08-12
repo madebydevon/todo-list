@@ -46,7 +46,7 @@
                <div class="add-project">
                   <button type="button" class="add-project">
                      <img class="plus-icon" src="" alt="" />
-                     <p class="project-name">Add project</p>
+                     <p class="project-name">+ Add project</p>
                   </button>
                </div>
             </div>
@@ -57,41 +57,22 @@
                <h2 class="group-name">Today</h2>
                <div class="pending-tasks">
                   <p class="task-count">0</p>
-                  <p>Pending tasks</p>
+                  <p>Tasks to complete</p>
                </div>
             </div>
-            <div class="tasks">
-               <div class="task-test">
-                  <!-- Insert check button somehow -->
-                  <p class="task-name-test">Build website</p>
-                  <div class="task-details">
-                     <svg
-                        class="example-flag"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                        viewBox="0 0 24 24">
-                        <path
-                           stroke="#828282"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                           stroke-width="2"
-                           d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
-                     </svg>
-                     <p class="due-date">Tue, 27 Aug</p>
-                  </div>
-               </div>
-            </div>
+            <div class="tasks"></div>
             <div class="new-task">
-               <img src="" alt="Plus icon; new task" class="plus-icon" />
-               <button class="new-task" type="button">New task</button>
+               <button class="new-task" type="button">+ New task</button>
             </div>
-            <dialog id="new-task-dialog">
-               <h2>New task</h2>
-               <form class="create-new-task" method="dialog" autocomplete="off">
+         </div>
+      </main>
+      <div class="task-modal-backdrop">
+         <dialog id="new-task-dialog">
+            <h2>New task</h2>
+            <form class="create-new-task" method="dialog">
+               <div class="wrapper">
                   <input
+                     required
                      class="task-name"
                      type="text"
                      placeholder="Task name" />
@@ -99,9 +80,12 @@
                      class="task-notes"
                      type="text"
                      placeholder="Task notes"></textarea>
-                  <select id="task-priority" name="task-priority">
+               </div>
+               <div class="detail-group">
+                  <select required id="task-priority" name="task-priority">
                      <option
                         value="No priority"
+                        selected
                         disabled
                         hidden
                         aria-hidden="true">
@@ -111,7 +95,7 @@
                      <option value="Medium priority">Medium priority</option>
                      <option value="High priority">High priority</option>
                   </select>
-                  <select name="task-project" id="task-project">
+                  <select required name="task-project" id="task-project">
                      <option value="Default">Choose project</option>
                      <!-- Delete the default option when the script fully works -->
                      <!-- Add more projects through javascript when new projects are created -->
@@ -120,14 +104,66 @@
                      class="task-due-date"
                      type="date"
                      placeholder="Due date" />
-
-                  <div class="new-task-buttons">
-                     <button class="submit-new-task">Create task</button>
-                     <button class="cancel-new-task">Cancel</button>
-                  </div>
-               </form>
-            </dialog>
-         </div>
-      </main>
+               </div>
+               <div class="new-task-buttons">
+                  <button class="submit-new-task" type="reset">
+                     Create task
+                  </button>
+                  <button class="cancel-new-task" type="reset">Cancel</button>
+               </div>
+            </form>
+         </dialog>
+      </div>
+      <div class="update-modal-backdrop">
+         <dialog class="update-modal">
+            <h2>Update task</h2>
+            <form action="">
+               <textarea
+                  class="update-task-name"
+                  placeholder="Task name"
+                  required></textarea>
+               <textarea
+                  class="update-task-notes"
+                  placeholder="Task notes"
+                  required></textarea>
+               <div class="detail-group">
+                  <select
+                     required
+                     class="update-task-priority"
+                     name="task-priority">
+                     <option
+                        value="No priority"
+                        selected
+                        disabled
+                        hidden
+                        aria-hidden="true">
+                        Choose priority
+                     </option>
+                     <option value="Low priority">Low priority</option>
+                     <option value="Medium priority">Medium priority</option>
+                     <option value="High priority">High priority</option>
+                  </select>
+                  <select
+                     required
+                     name="task-project"
+                     class="update-task-project">
+                     <option value="Default">Choose project</option>
+                     <!-- Delete the default option when the script fully works -->
+                     <!-- Add more projects through javascript when new projects are created -->
+                  </select>
+                  <input
+                     class="update-task-due-date"
+                     type="date"
+                     placeholder="Due date" />
+               </div>
+               <div class="new-task-buttons">
+                  <button class="delete-task" type="reset">Delete task</button>
+                  <button class="update-task" type="button">
+                     Save changes
+                  </button>
+               </div>
+            </form>
+         </dialog>
+      </div>
    </body>
 </html>
