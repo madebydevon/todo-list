@@ -9,24 +9,18 @@ import {
    updateTask,
 } from "./modules/taskManager.js"
 
-const task = createTask(
-   "Research topics",
-   "Maintain the website to standards",
+const exampleTask = createTask(
+   `Research topics`,
+   "Investigate several topics for my research",
    "Medium priority",
    new Date(),
    "Default",
    false
 )
 
-// tasks[task.taskName] = task
+document.addEventListener("DOMContentLoaded", () => {
+   displayTasks()
+   handleNewTask()
+})
 
-displayTasks()
-handleNewTask()
-onTaskClick()
 console.log(tasks)
-
-// console.log()
-
-// removeTask(`${task[0]}`)
-
-// console.log(tasks)

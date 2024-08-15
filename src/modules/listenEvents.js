@@ -3,6 +3,7 @@ import { processNewTask } from "./handleUserInput.js"
 import { tasks, updateTask } from "./taskManager.js"
 import { getTaskInfo } from "./taskManager.js"
 import { populateTaskForm } from "./domManipulation.js"
+import { translateDueDate } from "./dateHandler.js"
 
 export function closeModal() {
    const newTaskModal = document.querySelector("#new-task-dialog")
@@ -35,20 +36,11 @@ export function handleNewTask() {
 }
 
 export function onTaskClick() {
-   const tasks = document.querySelectorAll(".task")
+   console.log("onTaskClick has ran")
    const modal = document.querySelector("dialog.update-modal")
-   const updateButton = document.querySelector("button.update-task")
-   const deleteButton = document.querySelector("button.delete-task")
+   const tasks = document.querySelectorAll(".task")
 
-   function handleEventListeners(taskInfo) {
-      updateTask(taskInfo)
-
-      const updateModal = document.querySelector("dialog.update-modal")
-      updateModal.close()
-
-      displayTasks()
-      onTaskClick()
-   }
+   let originalTaskName = ""
 
    function handleClick(event) {
       if (event.target.classList.contains("complete-task")) {
@@ -56,54 +48,63 @@ export function onTaskClick() {
       }
 
       const selectedElement = event.target
+
       const taskInfo = getTaskInfo(
          `${selectedElement.closest(".task").getAttribute("data-value")}`
       )
 
-      modal.showModal()
-      populateTaskForm(taskInfo)
+      originalTaskName = taskInfo.taskName
 
-      updateButton.removeEventListener("click", () => {
-         handleEventListeners(taskInfo)
-      })
-      updateButton.addEventListener("click", () => {
-         handleEventListeners(taskInfo)
-      })
+      if (modal) {
+         modal.showModal()
+         console.log("Modal opened")
+         populateTaskForm(taskInfo)
+         setupUpdateListeners()
+         // Set up update button listener for the task
+      }
    }
 
-   tasks.forEach((task, index) => {
-      task.removeEventListener("click", handleClick)
-      console.log("Event listener for each task attached")
+   function setupUpdateListeners() {
+      const updateButton = document.querySelector("button.update-task")
+      updateButton.removeEventListener("click", handleUpdateClick)
+      updateButton.addEventListener("click", handleUpdateClick)
+   }
+
+   function handleUpdateClick() {
+      // get input, either by seperate function or in this function
+      const taskName = document.querySelector("textarea.update-task-name").value
+      const taskNotes = document.querySelector(
+         "textarea.update-task-notes"
+      ).value
+      const taskPriority = document.querySelector(
+         "select.update-task-priority"
+      ).value
+      const taskProject = document.querySelector(
+         "select.update-task-project"
+      ).value
+      const taskDueDate = document.querySelector(
+         "input.update-task-due-date"
+      ).value
+
+      const updatedTask = {
+         taskName,
+         taskNotes,
+         taskPriority,
+         taskProject,
+         taskDueDate: new Date(taskDueDate),
+         taskComplete: false,
+      }
+
+      // update the task with that input
+      updateTask(updatedTask, originalTaskName)
+      // display the tasks again
+      displayTasks()
+      console.log("Modal closed")
+      modal.close()
+   }
+   
+   tasks.forEach((task) => {
+      task.removeEventListener("click", handleClick) // Clear existing listeners
       task.addEventListener("click", handleClick)
    })
-}
-
-function setupUpdateButtonListener(taskInfo) {
-   const updateButton = document.querySelector("button.update-task")
-   function updateTaskHandler() {
-      // Update the taskInfo object with form values before saving
-      taskInfo.taskName = document.querySelector(".update-task-name").value
-      taskInfo.taskNotes = document.querySelector(".update-task-notes").value
-      taskInfo.taskPriority = document.querySelector(
-         ".update-task-priority"
-      ).value
-      taskInfo.taskProject = document.querySelector(
-         ".update-task-project"
-      ).value
-      taskInfo.taskDueDate = document.querySelector(
-         ".update-task-due-date"
-      ).value
-
-      // Update the main tasks object
-      updateTask(taskInfo)
-
-      // Close the update modal
-      const updateModal = document.querySelector("dialog.update-modal")
-      updateModal.close()
-
-      displayTasks()
-   }
-
-   updateButton.removeEventListener("click", updateTaskHandler)
-   updateButton.addEventListener("click", updateTaskHandler)
 }

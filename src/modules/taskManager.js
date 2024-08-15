@@ -23,7 +23,7 @@ export function createTask(
       taskPriority,
       taskDueDate,
       taskProject,
-      taskComplete,
+      taskComplete: false,
    }
 }
 
@@ -31,9 +31,20 @@ export function removeTask(name) {
    delete tasks[`${name}`]
 }
 
-export function updateTask(taskInfo) {
-   tasks[taskInfo.newTaskName] = taskInfo
-   console.log(tasks)
+export function updateTask(updatedTask, originalTaskName) {
+   if (!originalTaskName || !updatedTask.taskName) {
+      return
+   }
+
+   if (originalTaskName !== updatedTask.taskName) {
+      if (tasks[originalTaskName]) {
+         delete tasks[originalTaskName]
+      }
+   }
+
+   tasks[updatedTask.taskName] = updatedTask
+
+   console.table(tasks)
 }
 
 export function getTaskInfo(taskDataValue) {

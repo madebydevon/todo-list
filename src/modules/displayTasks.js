@@ -18,4 +18,5 @@ export function displayTasks() {
          task.taskComplete
       )
    })
+   onTaskClick()
 }
