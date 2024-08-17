@@ -20,6 +20,7 @@ const exampleTask = createTask(
 
 document.addEventListener("DOMContentLoaded", () => {
    displayTasks()
+   onTaskClick()
    handleNewTask()
 })
 
