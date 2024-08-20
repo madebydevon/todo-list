@@ -1,4 +1,4 @@
-import { displayTasks } from "./displayTasks.js"
+import { runApp } from "../index.js"
 import { processNewTask } from "./handleUserInput.js"
 import { tasks, updateTask } from "./taskManager.js"
 import { getTaskInfo } from "./taskManager.js"
@@ -18,10 +18,9 @@ export function handleNewTask() {
    const form = document.querySelector("#new-task-dialog > form")
    const submitButton = document.querySelector("button.submit-new-task")
    const cancelButton = document.querySelector("button.cancel-new-task")
-
    function handleTask(event) {
       processNewTask()
-      displayTasks()
+      runApp()
       event.preventDefault()
       form.reset()
    }
@@ -36,9 +35,9 @@ export function handleNewTask() {
 }
 
 export function onTaskClick() {
-   console.log("onTaskClick has ran")
    const modal = document.querySelector("dialog.update-modal")
    const tasks = document.querySelectorAll(".task")
+   const updateButton = document.querySelector("button.update-task")
 
    let originalTaskName = ""
 
@@ -57,7 +56,6 @@ export function onTaskClick() {
 
       if (modal) {
          modal.showModal()
-         console.log("Modal opened")
          populateTaskForm(taskInfo)
          setupUpdateListeners()
          // Set up update button listener for the task
@@ -65,7 +63,6 @@ export function onTaskClick() {
    }
 
    function setupUpdateListeners() {
-      const updateButton = document.querySelector("button.update-task")
       updateButton.removeEventListener("click", handleUpdateClick)
       updateButton.addEventListener("click", handleUpdateClick)
    }
@@ -98,11 +95,11 @@ export function onTaskClick() {
       // update the task with that input
       updateTask(updatedTask, originalTaskName)
       // display the tasks again
-      displayTasks()
-      console.log("Modal closed")
+      runApp()
       modal.close()
+      updateButton.removeEventListener("click", handleUpdateClick)
    }
-   
+
    tasks.forEach((task) => {
       task.removeEventListener("click", handleClick) // Clear existing listeners
       task.addEventListener("click", handleClick)

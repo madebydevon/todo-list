@@ -43,9 +43,10 @@ export function updateTask(updatedTask, originalTaskName) {
    }
 
    tasks[updatedTask.taskName] = updatedTask
-
-   console.table(tasks)
 }
+
+// export function completeTask(selectedTask) {
+// }
 
 export function getTaskInfo(taskDataValue) {
    return {

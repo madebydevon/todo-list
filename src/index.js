@@ -18,10 +18,10 @@ const exampleTask = createTask(
    false
 )
 
-document.addEventListener("DOMContentLoaded", () => {
+export function runApp() {
    displayTasks()
-   onTaskClick()
    handleNewTask()
-})
+   onTaskClick()
+}
 
-console.log(tasks)
+document.addEventListener("DOMContentLoaded", runApp)
